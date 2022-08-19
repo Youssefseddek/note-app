@@ -1,0 +1,22 @@
+
+#signUp{
+    min-height: 100vh;
+    background-color: #343a40;
+}
+
+form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% ,-50%);
+}
+
+.copyright{
+    position: absolute;
+    bottom: 20px;
+}
+@media all and (max-width: 767px)  {
+    .m {
+     margin-bottom:16px;
+    }
+  }

@@ -1,0 +1,176 @@
+
+<section id="profile" class="py-5">
+
+    <div class="container p-5  ">
+      
+      <h3 class="h1 text-info">{{userName}}</h3>
+
+
+    <div *ngIf="!isload" class="row">
+      <div class="col-md-12 text-center">
+        <!-- <i class="fa-solid fa-spinner  "></i> -->
+        <i class="fa-solid fa-circle-notch fa-spin fs-1"></i>
+      </div>
+    </div>
+    
+
+        <div *ngIf="isload" class="row ">
+            
+            <div class="col-md-12 m-3">
+
+                <button class="btn btn-info float-end" data-bs-toggle="modal" data-bs-target="#addNote">Add Note</button>
+
+            </div>
+
+            <div *ngIf="notFound" class="alert alert-info text-center fs-4">
+              {{notFoundMessage}}
+            </div>
+
+            <div *ngFor="let note of AllNotes" class=" col-lg-4  mb-3 ">
+
+                <div class="note text-center Shadow">
+
+                    <div class="text-end pe-4 pt-3 ">
+                        <i class="fa-solid fa-ellipsis-vertical fs-4 " data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <div class="dropdown">
+
+                            <ul class="dropdown-menu p-2">
+                              <li><a class="dropdown-item text-primary" (click)="getId(note._id);setValue()" data-bs-toggle="modal" data-bs-target="#editeNote" >Edit <i class="fa-solid fa-square-pen float-end"></i></a></li>
+                              <li><a class="dropdown-item text-danger" (click)="getId(note._id)" data-bs-toggle="modal" data-bs-target="#deleteNote" >Delete <i class="fa-solid fa-trash float-end"></i></a></li>
+
+                            </ul>
+                          </div>
+                    </div>
+
+                    <h2>{{note.title}}</h2>
+
+                    <p>{{note.desc}}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- ===================================== Add Note Model =============================== -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="addNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+    <div class="modal-dialog">
+      <form  [formGroup]="AddNote" (ngSubmit)="addData(AddNote)"> 
+      
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="container">
+  
+                  <input formControlName="title" type="text" class="form-control mb-3" placeholder="Title" id="">
+  
+                  <textarea formControlName="desc" name="" id="" class="form-control" placeholder="Type Your Note"  cols="30" rows="10"></textarea>
+  
+              </div>
+  
+  
+          </div>
+          <div class="modal-footer ">
+            <button type="submit" class="btn btn-info" data-bs-dismiss="modal">Add</button>
+            <button type="button" class="btn btn-danger">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+      
+    </div>
+  </div>
+
+
+  <!-- ===================================== /Add Note Model =============================== -->
+
+
+
+
+
+  <!-- ===================================== Edite Note Model =============================== -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="editeNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+  <form  [formGroup]="EditeNote" (ngSubmit)="editeNote(EditeNote)">
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="container">
+
+              <input formControlName="title"  type="text" class="form-control mb-3" placeholder="Title" id="">
+
+              <textarea formControlName="desc" name="" id="" class="form-control" placeholder="Type Your Note"  cols="30" rows="10"></textarea>
+
+          </div>
+
+
+      </div>
+      <div class="modal-footer ">
+        <button type="submit" class="btn btn-info" data-bs-dismiss="modal">Update</button>
+        <button type="button" class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+
+  </form>
+    </div>
+  </div>
+
+
+  <!-- ===================================== /Edite Note Model =============================== -->
+
+
+
+
+
+
+    <!-- ===================================== Delete Note Model =============================== -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="deleteNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container text-center text-info">
+
+                <p>Do you really want to delete ?<br>
+                    process cannot be undone</p>
+              
+            </div>
+
+
+        </div>
+        <div class="modal-footer ">
+          <button type="button" (click)="deleteNote()" class=" btn btn-danger " data-bs-dismiss="modal">Delete</button>
+          <button type="button" class=" btn btn-info ">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== /Delete Note Model =============================== -->

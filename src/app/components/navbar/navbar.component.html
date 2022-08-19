@@ -1,0 +1,43 @@
+
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark position-absolute w-100">
+    <div class="container" >
+        
+      <a class="navbar-brand" href="#"><i class="fa-solid fa-note-sticky text-white fs-5 me-1"></i>Notes</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- <h2 class="m-auto text-white">welcome {{welcomeName}}</h2> -->
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+
+          <li *ngIf="!isLogin" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Login
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/signup">signUp</a></li>
+              <li><a class="dropdown-item" routerLink="/signin">signIn</a></li>
+            
+            </ul>
+          </li>
+          <li *ngIf="isLogin" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Logout
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" (click)="calllogout()">Logout</a></li>
+            
+            </ul>
+          </li>
+<!-- 
+          <li *ngIf="isLogin" class="text-white" >
+            <a href="">Logout</a>
+          </li> -->
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>

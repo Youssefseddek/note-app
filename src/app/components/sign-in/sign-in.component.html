@@ -1,0 +1,52 @@
+ 
+<section id="signIn" class="">
+
+    <div class="container ">
+        <form [formGroup]="signinFrom" (ngSubmit)="signinFrom.valid&&submitSigninForm(signinFrom)"  class="w-50" >
+
+            <input [class.is-valid]="signinFrom.get('email')?.status=='VALID'"   formControlName="email"   type="email" class="form-control mb-3 " placeholder="Enter Your Email" id="">
+            <div *ngIf="signinFrom.get('email')?.errors && signinFrom.get('email')?.touched" >
+                <p *ngIf="signinFrom.get('email')?.errors?.['required']" class="alert alert-danger">Email name is required</p>
+                <p *ngIf="signinFrom.get('email')?.errors?.['email']" class="alert alert-danger">Email is Invalid</p>
+            </div>
+
+
+
+            <input [class.is-valid]="signinFrom.get('password')?.status=='VALID'"  formControlName="password"   type="password" class="form-control mb-3 "    placeholder="Enter Your Password" id="">
+            <div *ngIf="signinFrom.get('password')?.errors && signinFrom.get('password')?.touched" >
+                <p *ngIf="signinFrom.get('password')?.errors?.['required']" class="alert alert-danger">Password is required</p>
+                <div *ngIf="signinFrom.get('password')?.errors?.['pattern']" class="alert alert-danger">
+                    <ul>
+                        <li>
+                            password must contain at least eight characters
+                        </li>
+                        <li>
+                            at least one number
+                        </li>
+                        <li>
+                            and both lower and uppercase letters
+                        </li>
+                        <li>
+                            and special characters
+                        </li>
+            </ul></div>
+            </div>
+
+
+
+
+            
+            <button [disabled]="signinFrom.invalid" [ngStyle]="signinFrom.invalid?{'background-color':'gray','border-color':'gray'}:{'background-color':'#17a2b8'}" class="btn btn-info w-100"><span *ngIf="isClicked">Wating...</span> <span *ngIf="!isClicked">sign In</span></button>
+
+            <div *ngIf="isSuccess" class="alert alert-success text-center my-3 ">{{messageSuccess}}</div>
+
+            <div *ngIf="isError" class="alert alert-danger text-center my-3 ">{{messageError}}</div>
+
+            
+        </form>
+
+    </div>
+
+    <p class="copyright text-center text-white w-100">&copy; 2022 youssef</p>    
+
+</section>
